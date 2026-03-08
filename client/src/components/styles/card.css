@@ -1,0 +1,13 @@
+.icon_place {
+  height: 48px;
+  width: 48px;
+  border-radius: 7px;
+  background-color: rgb(229, 239, 255);
+  color: rgb(0, 102, 255);
+}
+.container_carte {
+  width: 384px;
+  height: 244px;
+  border-radius: 10px;
+
+}
