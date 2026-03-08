@@ -1,11 +1,11 @@
 import Navbar from "./components/navbar";
 import Home from "./pages/Home";
-
+import { Link, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <div>
       <Home />
-      
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<h1>Signup page</h1>} />
