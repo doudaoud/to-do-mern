@@ -1,11 +1,9 @@
-import Navbar from "./components/navbar";
 import Home from "./pages/Home";
-import { Link, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <div>
-      <Home />
-
+      {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<h1>Signup page</h1>} />
@@ -14,6 +12,7 @@ function App() {
         <Route path="/profile" element={<h1>Profile page</h1>} />
         <Route path="/settings" element={<h1>Settings page</h1>} />
       </Routes>
+      {/* Routes */}
     </div>
   );
 }

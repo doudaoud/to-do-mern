@@ -1,0 +1,30 @@
+.titles_hero2 {
+  padding-top: 150px;
+  text-align: center;
+}
+
+.kht{
+  border: 0;
+  height: 1px;
+  background-color: rgb(224,224,224);
+}
+.titles_hero2 > h1 {
+  font-size: 3em;
+  font-weight: 900;
+  font-family: "Arial", sans-serif;
+  margin-bottom: 30px;
+  word-spacing: -5px;
+}
+.titles_hero2 > p {
+  
+  width: 45%;
+  /* background-color: aqua; */
+  margin: auto;
+  margin-top: -10px;
+  font-size: 20px;
+  font-family: "Arial", sans-serif;
+  line-height: 28px;
+  font-weight: 500;
+  color: rgb(118, 118, 118);
+  margin-bottom: 30px;
+}
