@@ -14,7 +14,7 @@ export default function Hero2() {
     },
     {
       logo: <AccessTimeIcon/>,
-      title: "`Planification temporelle",
+      title: "Planification temporelle",
       discreption:
         "Définissez des dates d'échéance et des rappels pour ne jamais oublier une tâche importante.",
     },

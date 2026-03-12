@@ -3,10 +3,10 @@
   text-align: center;
 }
 
-.kht{
+.kht {
   border: 0;
   height: 1px;
-  background-color: rgb(224,224,224);
+  background-color: rgb(224, 224, 224);
 }
 .titles_hero2 > h1 {
   font-size: 3em;
@@ -16,7 +16,6 @@
   word-spacing: -5px;
 }
 .titles_hero2 > p {
-  
   width: 45%;
   /* background-color: aqua; */
   margin: auto;
@@ -27,4 +26,10 @@
   font-weight: 500;
   color: rgb(118, 118, 118);
   margin-bottom: 30px;
+}
+.cards {
+  display: flex;
+  width: 90%;
+  margin: auto ;
+  justify-content: space-around;
 }
