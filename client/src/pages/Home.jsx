@@ -15,8 +15,9 @@ export default function Home() {
         style={{
           width: "90%",
           margin: "auto",
-          height: "500px",
-          marginTop:200
+          height: "100%",
+          marginTop: 200,
+          // boxShadow: "0px 2px 10px rgba(0,0,0,0.3)",
         }}
       >
         <img
@@ -25,7 +26,8 @@ export default function Home() {
             width: "95%",
             margin: "auto",
             height: "700px",
-            marginLeft:"33px"
+            marginLeft: "33px",
+            boxShadow: "0px 2px 10px rgba(0,0,0,0.3)",
           }}
         />
       </div>
