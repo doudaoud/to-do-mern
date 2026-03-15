@@ -3,7 +3,9 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import "./styles/navbar.css";
+import { useNavigate } from "react-router-dom";
 export default function Navbar() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="container">
@@ -44,6 +46,11 @@ export default function Navbar() {
               color="primary"
               size="large"
               className="button_connextion"
+              onClick={() => {
+              
+                navigate("/signup");
+
+              }}
             >
               connecter
             </Button>
