@@ -5,6 +5,7 @@ import { Link, Routes, Route } from "react-router-dom";
 import Hero2 from "../components/Hero2";
 import img from "../images/graphe.webp";
 import Hero3 from "../components/Hero3";
+import Footer from "../components/Footer";
 export default function Home() {
   return (
     <>
@@ -30,11 +31,11 @@ export default function Home() {
             marginLeft: "33px",
             boxShadow: "0px 2px 10px rgba(0,0,0,0.3)",
             marginBottom: 100,
-            
           }}
         />
       </div>
-      <Hero3/>
+      <Hero3 />
+      <Footer />
     </>
   );
 }
