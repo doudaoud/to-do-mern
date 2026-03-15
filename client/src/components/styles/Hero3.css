@@ -1,6 +1,35 @@
-.hero3_container {
-
+.hero3{
   display: flex;
   justify-content: center;
-  
+  flex-flow: row ;
+  border-top: 1px solid rgb(224, 224, 224);
+  padding-top: 100px;
+  gap:70px;
+  /* background-color: hsl(0, 43%, 48%); */
+}
+.hero3_container{
+  /* background-color: #ae4646; */
+}
+.titles_hero3{
+  /* margin: auto; */
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.titles_hero3 > h2{
+    font-size: 3em;
+  font-weight: 900;
+  font-family: "Arial", sans-serif;
+  margin-bottom: 30px;
+  word-spacing: -5px;
+}
+.titles_hero3 > p{
+  width: 75%;;
+  /* margin: auto; */
+  margin-top: -10px;
+  font-size: 20px;
+  font-family: "Arial", sans-serif;
+  line-height: 28px;
+  font-weight: 500;
+  color: rgb(118, 118, 118);
+  margin-bottom: 30px;
 }
