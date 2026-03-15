@@ -3,7 +3,10 @@
   justify-content: center;
   flex-flow: row ;
   border-top: 1px solid rgb(224, 224, 224);
+  border-bottom: 1px solid rgb(224, 224, 224);
   padding-top: 100px;
+  padding-bottom: 100px;
+
   gap:70px;
   /* background-color: hsl(0, 43%, 48%); */
 }
