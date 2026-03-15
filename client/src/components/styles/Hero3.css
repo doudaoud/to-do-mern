@@ -23,8 +23,7 @@
   word-spacing: -5px;
 }
 .titles_hero3 > p{
-  width: 75%;;
-  /* margin: auto; */
+  width: 75%;
   margin-top: -10px;
   font-size: 20px;
   font-family: "Arial", sans-serif;
@@ -32,4 +31,25 @@
   font-weight: 500;
   color: rgb(118, 118, 118);
   margin-bottom: 30px;
+}
+.icon_title{
+  display: flex;
+}
+.part2{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.icon{
+  color: rgb(0, 102, 255);
+  margin-top: 5px;
+}
+.title_icon{
+margin-left: 10px;
+}
+.title_icon >p{
+  color: rgb(118, 118, 118);
+  font-size: 16px;
+  font-family: "Arial", sans-serif;
+  
 }
