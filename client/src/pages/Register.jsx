@@ -1,6 +1,28 @@
 import "./styles/register.css";
+import React from "react";
+import { useState } from "react";
 
 export default function Register() {
+  const [form, setForm] = useState({
+    userName: "",
+    email: "",
+    mdps: "",
+    cmdps: "",
+  });
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setForm({ ...form, [id]: value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+    setForm({
+      userName: "",
+      email: "",
+      mdps: "",
+      cmdps: "",
+    });
+  };
   return (
     <div className="register-container">
       {/* LEFT SIDE */}
@@ -10,23 +32,43 @@ export default function Register() {
           <p className="subtitle">
             Rejoignez-nous et commencez à organiser vos tâches
           </p>
-
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label>Nom complet</label>
-              <input type="text" placeholder="Jean Dupont" />
+              <input
+                type="text"
+                placeholder="Jean Dupont"
+                value={form.userName}
+                onChange={handleChange}
+                id="userName"
+                required
+              />
             </div>
 
             <div className="input-group">
               <label>Email</label>
-              <input type="email" placeholder="vous@exemple.com" />
+              <input
+                type="email"
+                value={form.email}
+                onChange={handleChange}
+                id="email"
+                required
+                placeholder="vous@exemple.com"
+              />
             </div>
 
             <div className="input-group">
               <label>Mot de passe</label>
 
               <div className="password-box">
-                <input type="password" placeholder="••••••••" />
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  id="mdps"
+                  value={form.mdps}
+                  onChange={handleChange}
+                  required
+                />
 
                 <button type="button">👁</button>
               </div>
@@ -36,7 +78,14 @@ export default function Register() {
               <label>Confirmer le mot de passe</label>
 
               <div className="password-box">
-                <input type="password" placeholder="••••••••" />
+                <input
+                  type="password"
+                  required
+                  id="cmdps"
+                  placeholder="••••••••"
+                  value={form.cmdps}
+                  onChange={handleChange}
+                />
 
                 <button type="button">👁</button>
               </div>
