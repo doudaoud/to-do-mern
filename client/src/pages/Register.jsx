@@ -9,10 +9,12 @@ export default function Register() {
     mdps: "",
     cmdps: "",
   });
+  const [loading, setLoading] = useState(false);
   const [see, setSee] = useState({
     mdps: false,
     cmdps: false,
   });
+  const [create, setCreate] = useState(false);
   // cette fonction pour le changer le state de form
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -22,6 +24,11 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
     setForm({
       userName: "",
       email: "",
@@ -79,7 +86,7 @@ export default function Register() {
                 <button
                   type="button"
                   onClick={() => {
-                    setSee({...see,mdps:!see.mdps});
+                    setSee({ ...see, mdps: !see.mdps });
                   }}
                 >
                   👁
@@ -92,7 +99,7 @@ export default function Register() {
 
               <div className="password-box">
                 <input
-                  type={see.cmdps ? "text" : "password"}
+                  type={see.cmdpsw ? "text" : "password"}
                   required
                   id="cmdps"
                   placeholder="••••••••"
@@ -103,7 +110,7 @@ export default function Register() {
                 <button
                   type="button"
                   onClick={() => {
-                    setSee({...see, cmdps: !see.cmdps});
+                    setSee({ ...see, cmdps: !see.cmdps });
                   }}
                 >
                   👁
@@ -111,7 +118,22 @@ export default function Register() {
               </div>
             </div>
 
-            <button className="register-btn">Créer mon compte</button>
+            <button
+              className="register-btn"
+              onClick={() => {
+                setCreate(!create);
+              }}
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <span className="spinner"></span>
+                  Veuillez patienter...
+                </>
+              ) : (
+                "Créer un compte"
+              )}
+            </button>
           </form>
 
           <p className="login-link">

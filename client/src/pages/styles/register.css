@@ -1,162 +1,176 @@
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-font-family:Inter, sans-serif;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Inter, sans-serif;
+}
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccc;
+  border-top: 2px solid black;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  animation: spin 0.6s linear infinite;
 }
 
-.register-container{
-display:flex;
-min-height:100vh;
-background:#f9fafb;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.register-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f9fafb;
 }
 
 /* LEFT */
 
-.form-section{
-flex:3;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:40px;
+.form-section {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
 }
 
-.form-box{
-width:400px;
+.form-box {
+  width: 400px;
 }
 
-h1{
-font-size:32px;
-margin-bottom:10px;
+h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
-.subtitle{
-color:#6b7280;
-margin-bottom:30px;
+.subtitle {
+  color: #6b7280;
+  margin-bottom: 30px;
 }
 
-.input-group{
-margin-bottom:20px;
+.input-group {
+  margin-bottom: 20px;
 }
 
-.input-group label{
-font-size:14px;
-margin-bottom:5px;
-display:block;
+.input-group label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
 }
 
-.input-group input{
-width:100%;
-border:none;
-border-bottom:2px solid #ddd;
-padding:10px 5px;
-font-size:15px;
-background:transparent;
-outline:none;
+.input-group input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  padding: 10px 5px;
+  font-size: 15px;
+  background: transparent;
+  outline: none;
 }
 
-.input-group input:focus{
-border-color:#2563eb;
+.input-group input:focus {
+  border-color: #2563eb;
 }
 
 /* PASSWORD */
 
-.password-box{
-display:flex;
-align-items:center;
+.password-box {
+  display: flex;
+  align-items: center;
 }
 
-.password-box button{
-background:none;
-border:none;
-cursor:pointer;
-font-size:18px;
-margin-left:10px;
+.password-box button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: 10px;
 }
 
 /* ERROR */
 
-.error{
-color:#dc2626;
-font-size:12px;
-margin-top:5px;
+.error {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: 5px;
 }
 
 /* BUTTON */
 
-.register-btn{
-width:100%;
-margin-top:20px;
-height:45px;
-background:#2563eb;
-color:white;
-border:none;
-cursor:pointer;
-font-weight:500;
-transition:0.3s;
+.register-btn {
+  width: 100%;
+  margin-top: 20px;
+  height: 45px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
-.register-btn:hover{
-background:white;
-color:#2563eb;
-border:2px solid #2563eb;
+.register-btn:hover {
+  background: white;
+  color: #2563eb;
+  border: 2px solid #2563eb;
 }
 
 /* LOGIN */
 
-.login-link{
-margin-top:20px;
-text-align:center;
-color:#6b7280;
-font-size:14px;
+.login-link {
+  margin-top: 20px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
 }
 
-.login-link span{
-color:#2563eb;
-cursor:pointer;
-font-weight:500;
+.login-link span {
+  color: #2563eb;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 /* RIGHT SIDE */
 
-.visual-section{
-flex:2;
-background:linear-gradient(135deg,#eff6ff,#f0fdf4);
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:40px;
+.visual-section {
+  flex: 2;
+  background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
 }
 
-.visual-content{
-max-width:300px;
+.visual-content {
+  max-width: 300px;
 }
 
-.icon{
-font-size:40px;
-margin-bottom:20px;
+.icon {
+  font-size: 40px;
+  margin-bottom: 20px;
 }
 
-.visual-content h2{
-margin-bottom:15px;
+.visual-content h2 {
+  margin-bottom: 15px;
 }
 
-.visual-content p{
-color:#6b7280;
-line-height:1.6;
+.visual-content p {
+  color: #6b7280;
+  line-height: 1.6;
 }
 
 /* RESPONSIVE */
 
-@media(max-width:900px){
+@media (max-width: 900px) {
+  .visual-section {
+    display: none;
+  }
 
-.visual-section{
-display:none;
-}
-
-.form-section{
-flex:1;
-}
-
+  .form-section {
+    flex: 1;
+  }
 }
