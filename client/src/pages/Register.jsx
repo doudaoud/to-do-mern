@@ -1,7 +1,7 @@
 import "./styles/register.css";
 import React from "react";
 import { useState } from "react";
-
+import { Sparkles } from "lucide-react";
 export default function Register() {
   const [form, setForm] = useState({
     userName: "",
@@ -9,10 +9,16 @@ export default function Register() {
     mdps: "",
     cmdps: "",
   });
+  const [see, setSee] = useState({
+    mdps: false,
+    cmdps: false,
+  });
+  // cette fonction pour le changer le state de form
   const handleChange = (e) => {
     const { id, value } = e.target;
     setForm({ ...form, [id]: value });
   };
+  // cette fonction pour envoyer le formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
@@ -62,7 +68,7 @@ export default function Register() {
 
               <div className="password-box">
                 <input
-                  type="password"
+                  type={see.mdps ? "text" : "password"}
                   placeholder="••••••••"
                   id="mdps"
                   value={form.mdps}
@@ -70,7 +76,14 @@ export default function Register() {
                   required
                 />
 
-                <button type="button">👁</button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSee({...see,mdps:!see.mdps});
+                  }}
+                >
+                  👁
+                </button>
               </div>
             </div>
 
@@ -79,7 +92,7 @@ export default function Register() {
 
               <div className="password-box">
                 <input
-                  type="password"
+                  type={see.cmdps ? "text" : "password"}
                   required
                   id="cmdps"
                   placeholder="••••••••"
@@ -87,7 +100,14 @@ export default function Register() {
                   onChange={handleChange}
                 />
 
-                <button type="button">👁</button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSee({...see, cmdps: !see.cmdps});
+                  }}
+                >
+                  👁
+                </button>
               </div>
             </div>
 
@@ -103,7 +123,9 @@ export default function Register() {
       {/* RIGHT SIDE */}
       <div className="visual-section">
         <div className="visual-content">
-          <div className="icon">✨</div>
+          <div className="icon">
+            <Sparkles />
+          </div>
 
           <h2>Commencez maintenant</h2>
 
