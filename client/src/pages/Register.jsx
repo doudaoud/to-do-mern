@@ -19,6 +19,8 @@ export default function Register() {
     cmdps: false,
   });
   const [create, setCreate] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
   // cette fonction pour le changer le state de form
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -46,6 +48,14 @@ export default function Register() {
     } catch (error) {
       console.log(error);
       setLoading(false);
+      if (error.response && error.response.data && error.response.data.message) {
+        setErrorMsg(error.response.data.message);
+      } else {
+        setErrorMsg("Une erreur s'est produite lors de l'inscription.");
+      }
+      setTimeout(() => {
+        setErrorMsg("");
+      }, 3000);
     }
   };
   return (
@@ -57,6 +67,11 @@ export default function Register() {
           <p className="subtitle">
             Rejoignez-nous et commencez à organiser vos tâches
           </p>
+          {errorMsg && (
+            <div className="error-message" style={{ color: "#d32f2f", backgroundColor: "#fdecea", padding: "10px", borderRadius: "8px", marginBottom: "15px", textAlign: "center", fontSize: "14px", fontWeight: "500" }}>
+              {errorMsg}
+            </div>
+          )}
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label>Nom complet</label>

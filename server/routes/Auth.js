@@ -18,6 +18,11 @@ router.post(
       return res.status(400).json({ message: err.details[0].message });
       
     } else {
+      const existingUser = await users.findOne({ Email: req.body.email });
+      if (existingUser) {
+        return res.status(400).json({ message: "Cet email est déjà utilisé." });
+      }
+
       const passwordverif = Math.floor(100000 + Math.random() * 900000);
       const mail = createMail(req.body.email, passwordverif);
       let response = await senMail(mail);
