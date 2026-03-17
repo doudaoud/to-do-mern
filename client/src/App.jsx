@@ -3,18 +3,41 @@ import { Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Confirme from "./pages/Confirme";
+
+import ProtectedRoute from "./utils/ProtectedRoute";
 function App() {
   return (
     <div>
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Register/>} />
+        <Route path="/signup" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/verify-compte" element ={ <Confirme/> }/>
-        <Route path="/dashboard" element={<h1>Dashboard page</h1>} />
-        <Route path="/profile" element={<h1>Profile page</h1>} />
-        <Route path="/settings" element={<h1>Settings page</h1>} />
+        <Route path="/verify-compte" element={<Confirme />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <h1>Dashboard page</h1>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <h1>Profile page</h1>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <h1>Settings page</h1>
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       {/* Routes */}
     </div>
@@ -22,4 +45,3 @@ function App() {
 }
 
 export default App;
-
