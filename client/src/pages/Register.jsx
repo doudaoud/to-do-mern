@@ -3,8 +3,10 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     userName: "",
     email: "",
@@ -23,20 +25,28 @@ export default function Register() {
     setForm({ ...form, [id]: value });
   };
   // cette fonction pour envoyer le formulaire
-  const  handleSubmit =async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-    const response = await axios.post("http://localhost:3000/api/register", form);
-    console.log(response);
-    setLoading(false);
-    setCreate(!create);   
-    }
-    catch (error) {
+      const response = await axios.post(
+        "http://localhost:3000/api/register",
+        form,
+      );
+
+      console.log(response);
+      localStorage.setItem("timesend", response.data.temps);
+      localStorage.setItem("code", response.data.passwordverif);
+      localStorage.setItem("email", form.email);
+      localStorage.setItem("name", form.userName);
+      localStorage.setItem("mdps", response.data.password);
+      setLoading(false);
+      setCreate(!create);
+      navigate("/verify-compte");
+    } catch (error) {
       console.log(error);
       setLoading(false);
     }
-   
   };
   return (
     <div className="register-container">
