@@ -1,7 +1,9 @@
 import "./styles/register.css";
 import React from "react";
+import axios from "axios";
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
+
 export default function Register() {
   const [form, setForm] = useState({
     userName: "",
@@ -21,20 +23,20 @@ export default function Register() {
     setForm({ ...form, [id]: value });
   };
   // cette fonction pour envoyer le formulaire
-  const handleSubmit = (e) => {
+  const  handleSubmit =async(e) => {
     e.preventDefault();
-    console.log(form);
     setLoading(true);
-
-    setTimeout(() => {
+    try {
+    const response = await axios.post("http://localhost:3000/api/register", form);
+    console.log(response);
+    setLoading(false);
+    setCreate(!create);   
+    }
+    catch (error) {
+      console.log(error);
       setLoading(false);
-    }, 2000);
-    setForm({
-      userName: "",
-      email: "",
-      mdps: "",
-      cmdps: "",
-    });
+    }
+   
   };
   return (
     <div className="register-container">
@@ -120,6 +122,7 @@ export default function Register() {
 
             <button
               className="register-btn"
+              type="submit"
               onClick={() => {
                 setCreate(!create);
               }}

@@ -9,6 +9,7 @@ const cors = require("cors");
 app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 // import routes and use it
+app.use("/api", require("./routes/Auth"));
 
 // create the server
 async function start_server() {
