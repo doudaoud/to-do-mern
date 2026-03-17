@@ -6,12 +6,16 @@
   color: rgb(0, 102, 255);
 }
 .container_carte {
-  width: 384px;
-  height: 220px;
+  width: 100%;
+  max-width: 384px;
+  height: auto;
+  min-height: 220px;
+  padding-bottom: 20px;
   border-radius: 10px;
   background-color:white;
   border: 1px solid rgb(243, 243, 243);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 .icon_place{
   /* margin: auto; */

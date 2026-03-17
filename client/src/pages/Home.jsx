@@ -6,32 +6,18 @@ import Hero2 from "../components/Hero2";
 import img from "../images/graphe.webp";
 import Hero3 from "../components/Hero3";
 import Footer from "../components/Footer";
+import "./styles/home.css";
 export default function Home() {
   return (
     <>
       <Navbar />
       <Hero />
       <Hero2 />
-      <div
-        className="inage-stat "
-        style={{
-          width: "90%",
-          margin: "auto",
-          height: "100%",
-          marginTop: 200,
-          // boxShadow: "0px 2px 10px rgba(0,0,0,0.3)",
-        }}
-      >
+      <div className="inage-stat">
         <img
           src={img}
-          style={{
-            width: "95%",
-            margin: "auto",
-            height: "700px",
-            marginLeft: "33px",
-            boxShadow: "0px 2px 10px rgba(0,0,0,0.3)",
-            marginBottom: 100,
-          }}
+          className="inage-stat-img"
+          alt="Statistiques"
         />
       </div>
       <Hero3 />

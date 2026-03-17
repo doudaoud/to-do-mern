@@ -80,3 +80,33 @@ img {
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+@media (max-width: 768px) {
+  .Hero {
+    height: auto;
+    padding: 100px 0;
+  }
+  .hero {
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero_left {
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .hero_right {
+    width: 100%;
+    margin-right: 0;
+  }
+  .button-gratuit {
+    margin-right: 15px;
+    margin-bottom: 15px;
+  }
+  img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+  }
+}

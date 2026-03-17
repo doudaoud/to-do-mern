@@ -10,13 +10,8 @@ export default function Hero3() {
         <div className="hero3_container">
           <img
             src={img}
-            style={{
-              width: 584,
-              height: 584,
-              borderRadius: 10,
-              boxShadow: "0px 2px 10px rgba(0,0,0,0.3)",
-              marginLeft: 99,
-            }}
+            className="hero3-img"
+            alt="Pourquoi TodoApp"
           />
         </div>
         <div className="titles_hero3">
