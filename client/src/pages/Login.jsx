@@ -1,8 +1,17 @@
 import { useState } from "react";
 import "./styles/login.css";
 import AnimatedContent from "./AnimatedContent";
+import { Eye, EyeOff } from "lucide-react";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const [login, setLogin] = useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setLogin({ ...login, [id]: value });
+  };
 
   return (
     <div className="login-container">
@@ -16,10 +25,20 @@ export default function Login() {
               <p>Accédez à votre espace de gestion de tâches</p>
             </div>
 
-            <form className="login-form">
+            <form
+              className="login-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
               <div className="form-group">
                 <label htmlFor="email">Adresse email</label>
-                <input id="email" type="email" placeholder="vous@exemple.com" />
+                <input
+                  id="email"
+                  type="email"
+                  onChange={handleChange}
+                  placeholder="vous@exemple.com"
+                />
               </div>
 
               <div className="form-group">
@@ -29,13 +48,14 @@ export default function Login() {
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
+                    onChange={handleChange}
                   />
                   <button
                     type="button"
                     className="toggle-password"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword ? "🙈" : "👁"}
+                    {showPassword ? <EyeOff /> : <Eye />}
                   </button>
                 </div>
               </div>
