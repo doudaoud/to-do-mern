@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import Confirme from "./pages/Confirme";
 
 import ProtectedRoute from "./utils/ProtectedRoute";
+import Profile from "./pages/Profile";
+import BlockedRoute from "./utils/BlockedRoute";
 function App() {
   return (
     <div>
@@ -13,7 +15,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/verify-compte" element={<Confirme />} />
+        <Route
+          path="/verify-compte"
+          element={
+            <BlockedRoute>
+              <Confirme />
+            </BlockedRoute>
+          }
+        />
         <Route
           path="/dashboard"
           element={
@@ -23,10 +32,10 @@ function App() {
           }
         />
         <Route
-          path="/profile"
+          path="/profile/:id"
           element={
             <ProtectedRoute>
-              <h1>Profile page</h1>
+              <Profile />
             </ProtectedRoute>
           }
         />

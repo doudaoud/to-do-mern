@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Confirme() {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const [state, setState] = useState({
     valide: null,
     message: "",
@@ -58,13 +58,12 @@ export default function Confirme() {
           user,
         );
         console.log(response);
-        if (response.status === 201) {
-          localStorage.removeItem("timesend");
-          localStorage.removeItem("code");
-          localStorage.removeItem("email");
-          localStorage.removeItem("name");
-          localStorage.removeItem("mdps");
-          Navigate("/login")
+        if (response.status === 200) {
+          localStorage.clear()
+          setTimeout(() => {
+          navigate("/login");   
+          }, 1000);
+         
         }
       } catch (error) {
         console.log(error);

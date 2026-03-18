@@ -44,6 +44,7 @@ export default function Register() {
       localStorage.setItem("email", form.email);
       localStorage.setItem("name", form.userName);
       localStorage.setItem("mdps", response.data.password);
+      localStorage.setItem("verify", true);
       setLoading(false);
       setCreate(!create);
       navigate("/verify-compte");
