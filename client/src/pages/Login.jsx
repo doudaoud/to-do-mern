@@ -2,17 +2,22 @@ import { useState } from "react";
 import "./styles/login.css";
 import AnimatedContent from "./AnimatedContent";
 import { Eye, EyeOff } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
+  const [message, setMessage] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setLogin({ ...login, [id]: value });
   };
-
+  const navigate = useNavigate();
   return (
     <div className="login-container">
       {/* LEFT */}
@@ -25,10 +30,78 @@ export default function Login() {
               <p>Accédez à votre espace de gestion de tâches</p>
             </div>
 
+            {message && (
+              <div
+                style={{
+                  color: "#2e7d32",
+                  backgroundColor: "#edf7ed",
+                  padding: "10px",
+                  borderRadius: "8px",
+                  marginBottom: "15px",
+                  textAlign: "center",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                }}
+              >
+                {message}
+              </div>
+            )}
+            {errorMsg && (
+              <div
+                style={{
+                  color: "#d32f2f",
+                  backgroundColor: "#fdecea",
+                  padding: "10px",
+                  borderRadius: "8px",
+                  marginBottom: "15px",
+                  textAlign: "center",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                }}
+              >
+                {errorMsg}
+              </div>
+            )}
+
             <form
               className="login-form"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
+                setErrorMsg("");
+                setMessage("");
+                try {
+                  const response = await axios.post(
+                    "http://localhost:3000/api/login",
+                    login,
+                  );
+                  console.log(response);
+                  if (response.status === 200) {
+                    setMessage(response.data.message);
+                    localStorage.setItem("TokenJwt", response.data.token);
+                    console.log(response.data.dataUser);
+                    setTimeout(() => {
+                      setMessage("");
+                      navigate("/profile");
+                    }, 3000);
+                    
+                  }
+                } catch (error) {
+                  console.log(error);
+                  if (
+                    error.response &&
+                    error.response.data &&
+                    error.response.data.message
+                  ) {
+                    setErrorMsg(error.response.data.message);
+                  } else {
+                    setErrorMsg(
+                      "Une erreur s'est produite lors de la connexion.",
+                    );
+                  }
+                  setTimeout(() => {
+                    setErrorMsg("");
+                  }, 3000);
+                }
               }}
             >
               <div className="form-group">
@@ -38,6 +111,7 @@ export default function Login() {
                   type="email"
                   onChange={handleChange}
                   placeholder="vous@exemple.com"
+                  required
                 />
               </div>
 
@@ -49,6 +123,7 @@ export default function Login() {
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
                     onChange={handleChange}
+                    required
                   />
                   <button
                     type="button"
@@ -60,7 +135,9 @@ export default function Login() {
                 </div>
               </div>
 
-              <button className="login-btn">Se connecter</button>
+              <button className="login-btn" type="submit">
+                Se connecter
+              </button>
             </form>
 
             <div className="login-footer">

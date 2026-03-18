@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const { users, validationDataRegister } = require("../models/user");
 const { createMail, senMail } = require("../utils/sendMailverif");
 /**
@@ -16,7 +18,6 @@ router.post(
     const { err } = validationDataRegister(req.body);
     if (err) {
       return res.status(400).json({ message: err.details[0].message });
-
     } else {
       const existingUser = await users.findOne({ Email: req.body.email });
       if (existingUser) {
@@ -56,12 +57,38 @@ router.post(
   asyncHandler(async (req, res) => {
     const { email, mdps, name } = req.body;
     const new_user = new users({
-     nomComplet: name,
-     Email: email,
-      password:mdps,
+      nomComplet: name,
+      Email: email,
+      password: mdps,
     });
     await new_user.save();
-    res.status(200).json({ message: "user created", status:201 });
+    res.status(200).json({ message: "user created", status: 201 });
+  }),
+);
+/**
+ * @method  POST
+ * @route /api/login
+ * @description user login
+ * @access public
+ */
+router.post(
+  "/login",
+  asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
+    const user = await users.findOne({ Email: email });
+    if (!user) {
+      return res.status(400).json({ message: "Utilisateur non trouvé" });
+    }
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      return res.status(400).json({ message: "mot de passe incorrect" });
+    }
+    const token = jwt.sign({ id: user._id , email: user.Email}, process.env.JWT_SECRET, {
+      expiresIn: "30d",
+    });
+    const dataUser = { password, ...user._doc };
+    delete dataUser.password;
+    res.status(200).json({ message: "connexion réussie", status: 200 , token, dataUser });
   }),
 );
 module.exports = router;
