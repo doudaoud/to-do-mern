@@ -1,6 +1,6 @@
 :root {
-  --primary-green: #10b981;
-  --secondary-green: #34d399;
+  --primary-blue: #0066ff;
+  --secondary-blue: #60a5fa;
   --bg-light: #f8fafc;
   --text-dark: #1e293b;
   --text-muted: #64748b;
@@ -21,100 +21,19 @@
     sans-serif;
 }
 
-/* Sidebar Styles */
-.sidebar {
-  width: 260px;
-  background-color: var(--white);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid var(--border-light);
-  height: 100vh;
-  position: sticky;
-  top: 0;
-}
-
-.sidebar-logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 32px;
-}
-
-.sidebar-section {
-  margin-bottom: 32px;
-}
-
-.section-title {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 16px;
-}
-
-.sidebar-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.menu-item {
-  padding: 10px 16px;
-  border-radius: 12px;
-  color: var(--text-dark);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 4px;
-}
-
-.menu-item:hover {
-  background-color: #f1f5f9;
-}
+/* Sidebar Styles are now in menu.css */
 
 .menu-item.active {
-  background-color: var(--primary-green);
+  background-color: var(--primary-blue);
   color: var(--white);
 }
 
-.progression-section {
-  margin-top: auto;
-  padding-top: 24px;
-}
-
-.progression-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.progression-header h3 {
-  font-size: 0.875rem;
-  color: var(--text-dark);
-  margin: 0;
-}
-
 .progression-percent {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--primary-green);
-}
-
-.progress-bar-bg {
-  height: 8px;
-  background-color: var(--border-light);
-  border-radius: 4px;
-  overflow: hidden;
+  color: var(--primary-blue);
 }
 
 .progress-bar-fill {
-  height: 100%;
-  background-color: var(--primary-green);
-  border-radius: 4px;
-  transition: width 0.3s ease;
+  background-color: var(--primary-blue);
 }
 
 /* Main Content Styles */
@@ -122,6 +41,7 @@
   flex: 1;
   padding: 40px;
   overflow-y: auto;
+  margin-left: 250px;
 }
 
 .content-header {
@@ -165,7 +85,7 @@
 }
 
 .add-task-btn {
-  background-color: var(--primary-green);
+  background-color: var(--primary-blue);
   color: var(--white);
   border: none;
   padding: 10px 20px;
@@ -179,7 +99,7 @@
 }
 
 .add-task-btn:hover {
-  background-color: #059669;
+  background-color: #0052cc;
 }
 
 /* Task Card */
@@ -205,7 +125,7 @@
 }
 
 .task-check {
-  color: var(--primary-green);
+  color: var(--primary-blue);
   margin-top: 4px;
 }
 

@@ -7,9 +7,11 @@
   flex-direction: column;
   gap: 32px;
   border-right: 1px solid #e2e8f0;
-  position: sticky;
+  position: fixed;
+  left: 0;
   top: 0;
   box-sizing: border-box;
+  z-index: 100;
 }
 
 .sidebar-logo {
