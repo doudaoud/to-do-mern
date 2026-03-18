@@ -8,18 +8,19 @@ const cors = require("cors");
 // cors policy
 app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
+
 // import routes and use it
 app.use("/api", require("./routes/Auth"));
 
 // create the server
 async function start_server() {
-  await connect_db();
   try {
+    await connect_db();
     app.listen(process.env.PORT, () => {
-      console.log(`http://localhost:${process.env.port}`);
+      console.log(`Serveur démarré : http://localhost:${process.env.PORT}`);
     });
   } catch (err) {
-    console.log(err);
+    console.error("Erreur au démarrage du serveur :", err);
     process.exit(1);
   }
 }
