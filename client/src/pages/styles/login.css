@@ -72,17 +72,43 @@
 
 /* BUTTON */
 .login-btn {
+  width: 100%;
   margin-top: 20px;
-  padding: 12px;
+  height: 45px;
   background: #2563eb;
   color: white;
-  border: 2px solid #2563eb;
+  border: none;
   cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
-.login-btn:hover {
-  background: transparent;
+.login-btn:hover:not(:disabled) {
+  background: white;
   color: #2563eb;
+  border: 2px solid #2563eb;
+}
+
+.login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccc;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* FOOTER */
