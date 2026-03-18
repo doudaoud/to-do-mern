@@ -1,10 +1,9 @@
 import React from "react";
 import { ListTodo, Flag, Layout, Users, FileText, User, Plus } from "lucide-react";
-
 export default function Menu() {
   return (
     <div className="sidebar">
-      <div className="logo">TaskFlow</div>
+      <div className="sidebar-logo">TaskFlow</div>
       
       <div className="sidebar-section">
         <p className="section-title">CATÉGORIES</p>
