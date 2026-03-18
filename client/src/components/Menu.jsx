@@ -1,5 +1,6 @@
 import React from "react";
 import { ListTodo, Flag, Layout, Users, FileText, User, Plus } from "lucide-react";
+import "./styles/menu.css";
 export default function Menu() {
   return (
     <div className="sidebar">
