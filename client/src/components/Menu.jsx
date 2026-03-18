@@ -1,20 +1,95 @@
 import React from "react";
-import { ListTodo, Flag, Layout, Users, FileText, User, Plus } from "lucide-react";
+import {
+  ListTodo,
+  Flag,
+  Layout,
+  Users,
+  FileText,
+  User,
+  Plus,
+} from "lucide-react";
 import "./styles/menu.css";
+import { useContext } from "react";
+import { SelectedContext } from "../contexts/SelectedContext";
 export default function Menu() {
+  const { selected, setSeleceted } = useContext(SelectedContext);
   return (
     <div className="sidebar">
       <div className="sidebar-logo">TaskFlow</div>
-      
+
       <div className="sidebar-section">
         <p className="section-title">CATÉGORIES</p>
         <ul className="sidebar-menu">
-          <li className="menu-item active">Tous</li>
-          <li className="menu-item">Travail</li>
-          <li className="menu-item">Réunions</li>
-          <li className="menu-item">Développement</li>
-          <li className="menu-item">Documentation</li>
-          <li className="menu-item">Personnel</li>
+          <li
+            onClick={() => {
+              setSeleceted({ ...selected, categorie: "Tous" });
+            }}
+            className={
+              selected.categorie === "Tous" ? "menu-item active" : "menu-item"
+            }
+          >
+            Tous
+          </li>
+          <li
+            onClick={() => {
+              setSeleceted({ ...selected, categorie: "Travail" });
+            }}
+            className={
+              selected.categorie === "Travail"
+                ? "menu-item active"
+                : "menu-item"
+            }
+          >
+            Travail
+          </li>
+          <li
+            onClick={() => {
+              setSeleceted({ ...selected, categorie: "reunions" });
+            }}
+            className={
+              selected.categorie === "reunions"
+                ? "menu-item active"
+                : "menu-item"
+            }
+          >
+            Réunions
+          </li>
+          <li
+            onClick={() => {
+              setSeleceted({ ...selected, categorie: "developpement" });
+            }}
+            className={
+              selected.categorie === "developpement"
+                ? "menu-item active"
+                : "menu-item"
+            }
+          >
+            Développement
+          </li>
+          <li
+            onClick={() => {
+              setSeleceted({ ...selected, categorie: "documentation" });
+            }}
+            className={
+              selected.categorie === "documentation"
+                ? "menu-item active"
+                : "menu-item"
+            }
+          >
+            Documentation
+          </li>
+          <li
+            onClick={() => {
+              setSeleceted({ ...selected, categorie: "personnel" });
+            }}
+            className={
+              selected.categorie === "personnel"
+                ? "menu-item active"
+                : "menu-item"
+            }
+          >
+            Personnel
+          </li>
         </ul>
       </div>
 
