@@ -20,17 +20,21 @@ export default function Profile() {
       <main className="main-content">
         <header className="content-header">
           <h1>Mes Tâches</h1>
-          <span className="current-date"> {today} </span>
+          <div
+            style={{
+              display: "flex",
+              gap: "10px",
+              alignItems: "center",
+            }}
+          >
+            <button className="add-task-btn">
+              <Plus size={18} />
+              Ajouter
+            </button>
+            <span className="current-date"> {today} </span>
+          </div>
         </header>
-
-        <div className="task-input-container">
-          <input type="text" placeholder="Ajouter une nouvelle tâche..." />
-          <button className="add-task-btn">
-            <Plus size={18} />
-            Ajouter
-          </button>
-        </div>
-
+        <hr />
         <div className="task-list">
           {/* Mock Task matching the image */}
           <div className="task-card">

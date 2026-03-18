@@ -47,8 +47,11 @@
 .content-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   margin-bottom: 32px;
+  /* background-color: white; */
+  /* height: 100px; */
+  
 }
 
 .content-header h1 {
