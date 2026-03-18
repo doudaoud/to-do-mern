@@ -96,10 +96,43 @@ export default function Menu() {
       <div className="sidebar-section">
         <p className="section-title">PRIORITÉ</p>
         <ul className="sidebar-menu">
-          <li className="menu-item">Toutes</li>
-          <li className="menu-item">High</li>
-          <li className="menu-item">Medium</li>
-          <li className="menu-item active">Low</li>
+          <li 
+            onClick={() => {
+              setSeleceted({ ...selected, priorite: "Toutes" });
+            }}
+            className={
+              selected.priorite === "Toutes" ? "menu-item active" : "menu-item"
+            } >Toutes</li>
+          <li
+            onClick={() => {
+              setSeleceted({ ...selected, priorite: "High" });
+            }}
+            className={
+              selected.priorite === "High" ? "menu-item active" : "menu-item"
+            }
+          >
+            High
+          </li>
+          <li
+            onClick={() => {
+              setSeleceted({ ...selected, priorite: "Medium" });
+            }}
+            className={
+              selected.priorite === "Medium" ? "menu-item active" : "menu-item"
+            }
+          >
+            Medium
+          </li>
+          <li
+            onClick={() => {
+              setSeleceted({ ...selected, priorite: "Low" });
+            }}
+            className={
+              selected.priorite === "Low" ? "menu-item active" : "menu-item"
+            }
+          >
+            Low
+          </li>
         </ul>
       </div>
 
