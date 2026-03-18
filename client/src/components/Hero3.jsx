@@ -1,12 +1,11 @@
 import React from "react";
 import { ArrowRight, CheckCircle2, Clock, Bell, Zap } from "lucide-react";
-import "./styles/Hero3.css";
+import "./styles/Hero3Updated.css";
 import img from "../images/img_hero_3.webp";
 export default function Hero3() {
-  return (
+  return ( 
     <>
       <div className="hero3">
-        {/* TODO  regler le css */}
         <div className="hero3_container">
           <img
             src={img}
@@ -22,21 +21,21 @@ export default function Hero3() {
           </p>
           <div className="part2">
             <div className="icon_title">
-              <Zap className="icon" />
+              <Zap size={20} color="rgb(0, 102, 255)" strokeWidth={2} style={{flexShrink:0, marginTop:2}} />
               <div className="title_icon">
                 <h4>Ultra rapide</h4>
                 <p>Interface fluide et réactive</p>
               </div>
             </div>
             <div className="icon_title">
-              <CheckCircle2 className="icon" />
+              <CheckCircle2 size={20} color="rgb(0, 102, 255)" strokeWidth={2} style={{flexShrink:0, marginTop:2}} />
               <div className="title_icon">
                 <h4>Facile à utiliser</h4>
                 <p>Pas de courbe d'apprentissage</p>
               </div>
             </div>
             <div className="icon_title">
-              <Clock className="icon" />
+              <Clock size={20} color="rgb(0, 102, 255)" strokeWidth={2} style={{flexShrink:0, marginTop:2}} />
               <div className="title_icon">
                 <h4>Synchronisation instantanée</h4>
                 <p>Accédez à vos tâches partout</p>

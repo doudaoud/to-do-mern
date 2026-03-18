@@ -1,0 +1,120 @@
+.hero3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgb(230, 230, 230);
+  border-bottom: 1px solid rgb(230, 230, 230);
+  padding: 80px 5%;
+  gap: 70px;
+  background-color: #ffffff;
+}
+
+.hero3_container {
+  flex: 1;
+  max-width: 480px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero3-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+.titles_hero3 {
+  flex: 1;
+  max-width: 540px;
+}
+
+.titles_hero3 > h2 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  font-family: "Arial", sans-serif;
+  margin: 0 0 18px 0;
+  color: #000;
+  line-height: 1.1;
+}
+
+.titles_hero3 > p {
+  font-size: 17px;
+  font-family: "Arial", sans-serif;
+  line-height: 1.55;
+  font-weight: 400;
+  color: rgb(100, 100, 100);
+  margin: 0 0 28px 0;
+}
+
+.part2 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Each feature row: icon left + stacked text right */
+.icon_title {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+/* Icon: small, blue, no background, no border */
+.icon {
+  color: rgb(0, 102, 255) !important;
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px;
+  max-width: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  display: block !important;
+}
+
+/* Title + description stacked inside same column */
+.title_icon {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.title_icon > h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  color: #111;
+}
+
+.title_icon > p {
+  font-size: 14px;
+  color: rgb(120, 120, 120);
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hero3 { gap: 40px; padding: 60px 4%; }
+  .titles_hero3 > h2 { font-size: 2.2rem; }
+}
+
+@media (max-width: 768px) {
+  .hero3 {
+    flex-direction: column;
+    padding: 50px 20px;
+    gap: 40px;
+  }
+  .hero3_container { max-width: 100%; }
+  .titles_hero3 { max-width: 100%; }
+  .titles_hero3 > h2 { font-size: 2rem; }
+}
