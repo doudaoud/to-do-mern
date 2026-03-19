@@ -4,6 +4,8 @@ import "./styles/profile.css";
 import { CheckCircle2, Clock, Trash2, Plus } from "lucide-react";
 import { useState } from "react";
 import { SelectedContext } from "../contexts/SelectedContext";
+import FormTache from "../components/FormTache";
+
 export default function Profile() {
   // Get current date in French
   const options = { weekday: "long", day: "numeric", month: "long" };
@@ -12,8 +14,11 @@ export default function Profile() {
     categorie: "Tous",
     priorite: "Toutes",
   });
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   return (
     <div className="profile-layout">
+      {isFormOpen && <FormTache onClose={() => setIsFormOpen(false)} />}
       <SelectedContext.Provider value={{ selected, setSeleceted }}>
         <Menu />
       </SelectedContext.Provider>
@@ -27,7 +32,10 @@ export default function Profile() {
               alignItems: "center",
             }}
           >
-            <button className="add-task-btn">
+            <button
+              className="add-task-btn"
+              onClick={() => setIsFormOpen(true)}
+            >
               <Plus size={18} />
               Ajouter
             </button>
