@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import "./styles/FormTache.css";
-
+import { useParams } from "react-router-dom";
+import axios from "axios";
 export default function FormTache({ onClose }) {
   const [task, setTask] = useState({
     title: "",
     description: "",
-    category: "Work",
-    priority: "Medium",
+    categorie: "work",
+    priorite: "Low",
     deadline: "",
   });
+  const { id } = useParams();
+  const cleanId = id.startsWith(":") ? id.slice(1) : id;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,12 +20,35 @@ export default function FormTache({ onClose }) {
       [name]: value,
     }));
   };
-
-  const handleSubmit = (e) => {
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Task submitted:", task);
-    // Add logic to save task via API here
-    if (onClose) onClose();
+    try {
+      const token = localStorage.getItem("TokenJwt");
+      const response = await axios.post(
+        `http://localhost:3000/api/create/${cleanId}`,
+        task,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setMessage(response.data.message);
+      setError("");
+      setTimeout(() => setMessage(""), 3000);
+      setTimeout(() => {
+        if (onClose) onClose();
+      }, 2000);
+    } catch (err) {
+      console.log(err);
+      setError(err.response?.data?.message || "Une erreur est survenue lors de la création de la tâche");
+      setMessage("");
+      // Clear error after 5 seconds
+      setTimeout(() => setError(""), 5000);
+    }
   };
 
   return (
@@ -48,6 +74,46 @@ export default function FormTache({ onClose }) {
             </button>
           )}
         </div>
+
+        {message && (
+          <div className="message success">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span>{message}</span>
+          </div>
+        )}
+
+        {error && (
+          <div className="message error">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span>{error}</span>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="title">Titre de la tâche</label>
@@ -78,15 +144,20 @@ export default function FormTache({ onClose }) {
               <label htmlFor="category">Catégorie</label>
               <select
                 id="category"
-                name="category"
-                value={task.category}
+                name="categorie"
+                value={task.categorie}
                 onChange={handleChange}
               >
                 <option value="Work">Travail</option>
                 <option value="Personal">Personnel</option>
-                <option value="Shopping">Achats</option>
-                <option value="Health">Santé</option>
-                <option value="Education">Éducation</option>
+                <option value="Réunions">Réunions</option>
+                <option
+                  value="Développement
+"
+                >
+                  Développement
+                </option>
+                <option value="Documentation">Documentation</option>
                 <option value="Other">Autre</option>
               </select>
             </div>
@@ -95,8 +166,8 @@ export default function FormTache({ onClose }) {
               <label htmlFor="priority">Priorité</label>
               <select
                 id="priority"
-                name="priority"
-                value={task.priority}
+                name="priorite"
+                value={task.priorite}
                 onChange={handleChange}
               >
                 <option value="Low">Basse</option>

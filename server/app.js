@@ -11,6 +11,7 @@ app.use(express.json());
 
 // import routes and use it
 app.use("/api", require("./routes/Auth"));
+app.use("/api", require("./routes/Tache"));
 
 // create the server
 async function start_server() {
