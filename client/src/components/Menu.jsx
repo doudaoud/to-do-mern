@@ -32,10 +32,10 @@ export default function Menu() {
           </li>
           <li
             onClick={() => {
-              setSeleceted({ ...selected, categorie: "Travail" });
+              setSeleceted({ ...selected, categorie: "Work" });
             }}
             className={
-              selected.categorie === "Travail"
+              selected.categorie === "Work"
                 ? "menu-item active"
                 : "menu-item"
             }
@@ -44,10 +44,10 @@ export default function Menu() {
           </li>
           <li
             onClick={() => {
-              setSeleceted({ ...selected, categorie: "reunions" });
+              setSeleceted({ ...selected, categorie: "Meeting" });
             }}
             className={
-              selected.categorie === "reunions"
+              selected.categorie === "Meeting"
                 ? "menu-item active"
                 : "menu-item"
             }
@@ -56,10 +56,10 @@ export default function Menu() {
           </li>
           <li
             onClick={() => {
-              setSeleceted({ ...selected, categorie: "developpement" });
+              setSeleceted({ ...selected, categorie: "Development" });
             }}
             className={
-              selected.categorie === "developpement"
+              selected.categorie === "Development"
                 ? "menu-item active"
                 : "menu-item"
             }
@@ -68,10 +68,10 @@ export default function Menu() {
           </li>
           <li
             onClick={() => {
-              setSeleceted({ ...selected, categorie: "documentation" });
+              setSeleceted({ ...selected, categorie: "Documentation" });
             }}
             className={
-              selected.categorie === "documentation"
+              selected.categorie === "Documentation"
                 ? "menu-item active"
                 : "menu-item"
             }
@@ -80,10 +80,10 @@ export default function Menu() {
           </li>
           <li
             onClick={() => {
-              setSeleceted({ ...selected, categorie: "personnel" });
+              setSeleceted({ ...selected, categorie: "Personal" });
             }}
             className={
-              selected.categorie === "personnel"
+              selected.categorie === "Personal"
                 ? "menu-item active"
                 : "menu-item"
             }
@@ -111,7 +111,7 @@ export default function Menu() {
               selected.priorite === "High" ? "menu-item active" : "menu-item"
             }
           >
-            High
+            Haute
           </li>
           <li
             onClick={() => {
@@ -121,7 +121,7 @@ export default function Menu() {
               selected.priorite === "Medium" ? "menu-item active" : "menu-item"
             }
           >
-            Medium
+            Moyenne
           </li>
           <li
             onClick={() => {
@@ -131,7 +131,7 @@ export default function Menu() {
               selected.priorite === "Low" ? "menu-item active" : "menu-item"
             }
           >
-            Low
+            Basse
           </li>
         </ul>
       </div>

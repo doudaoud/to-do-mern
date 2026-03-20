@@ -8,8 +8,10 @@ import FormTache from "../components/FormTache";
 import CarteTask from "../components/CarteTask";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { affichecontext } from "../contexts/AfficheContext";
+import { useNavigate } from "react-router-dom";
+import { AfficheContext } from "../contexts/AfficheContext";
 export default function Profile() {
+  const navigate = useNavigate();
   // Get current date in French
   const options = { weekday: "long", day: "numeric", month: "long" };
   const today = new Date().toLocaleDateString("fr-FR", options);
@@ -24,7 +26,14 @@ export default function Profile() {
 
   // cree la fonction de la filtration des donnes pour affichage
 
-  const handleFilter = (data) => {};
+  const handleFilter = (dataa) => {
+    return dataa.filter((task) => {
+      const { categorie, priorite } = selected;
+      const matchCategorie = categorie === "Tous" || task.categorie === categorie;
+      const matchPriorite = priorite === "Toutes" || task.priorite === priorite;
+      return matchCategorie && matchPriorite;
+    });
+  };
 
   //fin fonction filter
   useEffect(() => {
@@ -35,18 +44,19 @@ export default function Profile() {
         );
         setData(response.data.taches);
         console.log(typeof response.data.taches);
+        console.log(response.data.taches);
       } catch (err) {
         console.log(err);
       }
     };
     handlecharge();
-  }, [create]);
+  }, [create, id]);
   return (
     <div className="profile-layout">
       {isFormOpen && (
-        <affichecontext.Provider value={{ create, setCreate }}>
+        <AfficheContext.Provider value={{ create, setCreate }}>
           <FormTache onClose={() => setIsFormOpen(false)} />
-        </affichecontext.Provider>
+        </AfficheContext.Provider>
       )}
       <SelectedContext.Provider value={{ selected, setSeleceted }}>
         <Menu />
@@ -69,6 +79,10 @@ export default function Profile() {
               Ajouter
             </button>
             <button
+              onClick={() => {
+                localStorage.clear();
+                navigate("/login");
+              }}
               className="logout-btn"
               style={{
                 display: "flex",
@@ -91,7 +105,7 @@ export default function Profile() {
           </div>
         </header>
         <hr />
-        <CarteTask taches={data} />
+        <CarteTask taches={handleFilter(data)} />
       </main>
     </div>
   );

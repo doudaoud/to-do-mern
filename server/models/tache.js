@@ -30,7 +30,11 @@ const schema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
       required: true,
-  }
+  },
+  faite: {
+    type: Boolean,
+    default: false,
+    }
 });
 const tache = mongoose.model("tache", schema);
 const validationDataTache = (data) => { 

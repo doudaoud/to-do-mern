@@ -3,14 +3,15 @@ import "./styles/FormTache.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
-import { affichecontext } from "../contexts/AfficheContext";
+import { AfficheContext } from "../contexts/AfficheContext";
+
 
 export default function FormTache({ onClose }) {
-  const { create, setCreate } = useContext(affichecontext);
+  const { create, setCreate } = useContext(AfficheContext);
   const [task, setTask] = useState({
     title: "",
     description: "",
-    categorie: "work",
+    categorie: "Work",
     priorite: "Low",
     deadline: "",
   });
@@ -158,13 +159,8 @@ export default function FormTache({ onClose }) {
               >
                 <option value="Work">Travail</option>
                 <option value="Personal">Personnel</option>
-                <option value="Réunions">Réunions</option>
-                <option
-                  value="Développement
-"
-                >
-                  Développement
-                </option>
+                <option value="Meeting">Réunions</option>
+                <option value="Development">Développement</option>
                 <option value="Documentation">Documentation</option>
                 <option value="Other">Autre</option>
               </select>

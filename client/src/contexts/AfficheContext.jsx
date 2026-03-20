@@ -1,2 +1,2 @@
 import { createContext } from "react";
-export const affichecontext = createContext(null);
+export const AfficheContext = createContext(null);
