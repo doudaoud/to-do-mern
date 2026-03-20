@@ -1,12 +1,16 @@
 import React from "react";
 import { CheckCircle2, Clock, Trash2 } from "lucide-react";
-// import { useState } from "react";
+import { useState } from "react";
 export default function CarteTask({ taches = [] }) {
-    // let array = [];
-    // for (let i = 0; i < taches.length; i++) {
-    //     array.push(taches._id, taches.faite);
-    // }
-  const [checked, setChecked] = useState();
+  let array = [];
+
+  for (let i = 0; i < taches.length; i++) {
+    let obj = {};
+    obj.id = taches[i]._id;
+    obj.faite = taches[i].faite;
+    array.push(obj);
+  }
+  const [check, setChecked] = useState(array);
   if (!taches || taches.length === 0) {
     return (
       <div className="task-list">
@@ -24,15 +28,29 @@ export default function CarteTask({ taches = [] }) {
           <input
             type="checkbox"
             className="task-check"
-            checked={task.faite}
-            onChange={(e) => {
-              setChecked(e.target.checked);
+            checked={check.map((e) => {
+             if( e.id===task._id)
+              return e.faite
+            })}
+                  onChange={(e) => {
+                      check.map((a) => { 
+                          if
+                      })
+                    
+
+              setChecked();
             }}
             size={24}
           />
           <div className="task-info">
-            <h4>{task.title}</h4>
-            <p>{task.description}</p>
+            <h4
+              style={{ textDecoration: task.faite ? "line-through" : "none" }}
+            >
+              {task.title}
+            </h4>
+            <p style={{ textDecoration: task.faite ? "line-through" : "none" }}>
+              {task.description}
+            </p>
             <div className="task-badges">
               <span className="badge badge-priority">
                 <span
