@@ -2,10 +2,13 @@ import React from "react";
 import Menu from "../components/Menu";
 import "./styles/profile.css";
 import { CheckCircle2, Clock, Trash2, Plus } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SelectedContext } from "../contexts/SelectedContext";
 import FormTache from "../components/FormTache";
-
+import CarteTask from "../components/CarteTask";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { affichecontext } from "../contexts/AfficheContext";
 export default function Profile() {
   // Get current date in French
   const options = { weekday: "long", day: "numeric", month: "long" };
@@ -14,11 +17,37 @@ export default function Profile() {
     categorie: "Tous",
     priorite: "Toutes",
   });
+  const { id } = useParams();
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [data, setData] = useState([]);
+  const [create, setCreate] = useState(false);
 
+  // cree la fonction de la filtration des donnes pour affichage
+
+  const handleFilter = (data) => {};
+
+  //fin fonction filter
+  useEffect(() => {
+    const handlecharge = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/tache/get/${id}`,
+        );
+        setData(response.data.taches);
+        console.log(typeof response.data.taches);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    handlecharge();
+  }, [create]);
   return (
     <div className="profile-layout">
-      {isFormOpen && <FormTache onClose={() => setIsFormOpen(false)} />}
+      {isFormOpen && (
+        <affichecontext.Provider value={{ create, setCreate }}>
+          <FormTache onClose={() => setIsFormOpen(false)} />
+        </affichecontext.Provider>
+      )}
       <SelectedContext.Provider value={{ selected, setSeleceted }}>
         <Menu />
       </SelectedContext.Provider>
@@ -43,31 +72,7 @@ export default function Profile() {
           </div>
         </header>
         <hr />
-        <div className="task-list">
-          {/* Mock Task matching the image */}
-          <div className="task-card">
-            <CheckCircle2 className="task-check" size={24} />
-
-            <div className="task-info">
-              <h4>Mettre à jour la documentation</h4>
-              <p>Ajouter les nouvelles API à la documentation</p>
-              <div className="task-badges">
-                <span className="badge badge-priority">
-                  <span className="priority-dot"></span>
-                  Basse
-                </span>
-                <span className="badge badge-category">Documentation</span>
-                <span className="task-time">
-                  <Clock size={14} />
-                  20 févr.
-                </span>
-              </div>
-            </div>
-            <button className="delete-task">
-              <Trash2 size={20} />
-            </button>
-          </div>
-        </div>
+        <CarteTask taches={data} />
       </main>
     </div>
   );

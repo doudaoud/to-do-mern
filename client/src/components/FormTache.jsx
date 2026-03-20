@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import "./styles/FormTache.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useContext } from "react";
+import { affichecontext } from "../contexts/AfficheContext";
+
 export default function FormTache({ onClose }) {
+  const { create, setCreate } = useContext(affichecontext);
   const [task, setTask] = useState({
     title: "",
     description: "",
@@ -28,7 +32,7 @@ export default function FormTache({ onClose }) {
     try {
       const token = localStorage.getItem("TokenJwt");
       const response = await axios.post(
-        `http://localhost:3000/api/create/${cleanId}`,
+        `http://localhost:3000/api/tache/create/${cleanId}`,
         task,
         {
           headers: {
@@ -39,12 +43,16 @@ export default function FormTache({ onClose }) {
       setMessage(response.data.message);
       setError("");
       setTimeout(() => setMessage(""), 3000);
+      setCreate(!create);
       setTimeout(() => {
         if (onClose) onClose();
       }, 2000);
     } catch (err) {
       console.log(err);
-      setError(err.response?.data?.message || "Une erreur est survenue lors de la création de la tâche");
+      setError(
+        err.response?.data?.message ||
+          "Une erreur est survenue lors de la création de la tâche",
+      );
       setMessage("");
       // Clear error after 5 seconds
       setTimeout(() => setError(""), 5000);

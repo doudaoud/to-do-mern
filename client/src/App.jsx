@@ -3,11 +3,24 @@ import { Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Confirme from "./pages/Confirme";
-
+import { useEffect } from "react";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Profile from "./pages/Profile";
 import BlockedRoute from "./utils/BlockedRoute";
 function App() {
+   useEffect(() => {
+     const blockBack = () => {
+       window.history.pushState(null, "", window.location.href);
+     };
+
+     blockBack();
+
+     window.addEventListener("popstate", blockBack);
+
+     return () => {
+       window.removeEventListener("popstate", blockBack);
+     };
+   }, []);
   return (
     <div>
       {/* Routes */}
