@@ -50,4 +50,18 @@ router.get(
     res.status(200).json({ taches, message: "taches recupirer avec succes" });
   }),
 );
+/**
+ * @Method  DELETE
+ * @description supprimer une tache
+ * @route /api/tache/delete/:id
+ * @access private
+ */
+router.delete(
+  "/delete/:id",
+  verifyToken,
+  asyncHandler(async (req, res) => {
+    await tache.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Tâche supprimée avec succès" });
+  }),
+);
 module.exports = router;

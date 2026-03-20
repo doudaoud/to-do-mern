@@ -105,7 +105,11 @@ export default function Profile() {
           </div>
         </header>
         <hr />
-        <CarteTask taches={handleFilter(data)} />
+        <CarteTask
+          taches={handleFilter(data)}
+          setCreate={setCreate}
+          create={create}
+        />
       </main>
     </div>
   );

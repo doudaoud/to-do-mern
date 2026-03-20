@@ -1,7 +1,8 @@
 import React from "react";
 import { CheckCircle2, Clock, Trash2 } from "lucide-react";
 import { useState, useEffect } from "react";
-export default function CarteTask({ taches = [] }) {
+import axios from "axios";
+export default function CarteTask({ taches = [], setCreate, create }) {
   const [check, setChecked] = useState([]);
 
   useEffect(() => {
@@ -10,6 +11,20 @@ export default function CarteTask({ taches = [] }) {
       setChecked(initialCheck);
     }
   }, [taches]);
+
+  const handleDelete = async (id) => {
+    try {
+      const token = localStorage.getItem("TokenJwt");
+      await axios.delete(`http://localhost:3000/api/tache/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (setCreate) setCreate(!create);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (!taches || taches.length === 0) {
     return (
@@ -72,7 +87,10 @@ export default function CarteTask({ taches = [] }) {
                 </span>
               </div>
             </div>
-            <button className="delete-task">
+            <button
+              className="delete-task"
+              onClick={() => handleDelete(task._id)}
+            >
               <Trash2 size={20} />
             </button>
           </div>
