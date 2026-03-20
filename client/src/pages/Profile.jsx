@@ -1,7 +1,7 @@
 import React from "react";
 import Menu from "../components/Menu";
 import "./styles/profile.css";
-import { CheckCircle2, Clock, Trash2, Plus } from "lucide-react";
+import { CheckCircle2, Clock, Trash2, Plus, LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
 import { SelectedContext } from "../contexts/SelectedContext";
 import FormTache from "../components/FormTache";
@@ -67,6 +67,25 @@ export default function Profile() {
             >
               <Plus size={18} />
               Ajouter
+            </button>
+            <button
+              className="logout-btn"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "10px 16px",
+                backgroundColor: "#fee2e2",
+                color: "#dc2626",
+                border: "none",
+                borderRadius: "8px",
+                cursor: "pointer",
+                fontWeight: "600",
+                transition: "background-color 0.2s",
+              }}
+            >
+              <LogOut size={18} />
+              Déconnexion
             </button>
             <span className="current-date"> {today} </span>
           </div>
