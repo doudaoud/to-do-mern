@@ -63,6 +63,7 @@ export default function Confirme() {
         message: "Un nouveau code a été envoyé par email.",
       });
     } catch (error) {
+      console.log(error);
       setState({
         valide: false,
         message: "Erreur lors du renvoi du code.",
