@@ -1,26 +1,22 @@
 import React from "react";
 import { CheckCircle2, Clock, Trash2 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 export default function CarteTask({ taches = [], setCreate, create }) {
-  const [check, setChecked] = useState([]);
-  const [change, setChange] = useState(false);
-  useEffect(() => {
-    if (taches) {
-      const initialCheck = taches.map((t) => ({ id: t._id, faite: t.faite }));
-      setChecked(initialCheck);
-    }
-  }, [taches]);
-  useEffect(() => {
-    for (let i of check) {
-      if (i.faite === true) {
-        setChange(true);
-        return;
-      } else {
-        setChange(false);
-      }
-    }
-  }, [check]);
+  const [check, setChecked] = useState(() =>
+    taches.map((t) => ({ id: t._id, faite: t.faite })),
+  );
+  const [prevTaches, setPrevTaches] = useState(taches);
+
+  if (taches !== prevTaches) {
+    setPrevTaches(taches);
+    setChecked(taches.map((t) => ({ id: t._id, faite: t.faite })));
+  }
+
+  const hasChanged = check.some((c) => {
+    const original = taches.find((t) => t._id === c.id);
+    return original && original.faite !== c.faite;
+  });
 
   const handleDelete = async (id) => {
     try {
@@ -107,20 +103,26 @@ export default function CarteTask({ taches = [], setCreate, create }) {
           </div>
         );
       })}
-      {change && (
+      {hasChanged && (
         <button
           className="save-button"
-          onClick={() => {
-            // Ajoutez votre logique de sauvegarde ici
+          onClick={async () => {
             try {
-              const response = axios.patch(
+              const token = localStorage.getItem("TokenJwt");
+              const response = await axios.patch(
                 "http://localhost:3000/api/tache/patch",
-                check,
+                check.filter((c) => {
+                  const original = taches.find((t) => t._id === c.id);
+                  return original && original.faite !== c.faite;
+                }),
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                },
               );
               console.log(response.data);
-              console.log("Sauvegarde des changements:", check);
-              setChange(false);
-
+              if (setCreate) setCreate(!create);
             } catch (err) {
               console.log(err);
             }

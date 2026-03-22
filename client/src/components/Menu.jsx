@@ -136,7 +136,7 @@ export default function Menu() {
         </ul>
       </div>
 
-      <div className="progression-section">
+      {/* <div className="progression-section">
         <div className="progression-header">
           <h3>Progression</h3>
           <span className="progression-percent">25%</span>
@@ -144,7 +144,7 @@ export default function Menu() {
         <div className="progress-bar-bg">
           <div className="progress-bar-fill" style={{ width: "25%" }}></div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
