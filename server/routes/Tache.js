@@ -64,4 +64,18 @@ router.delete(
     res.status(200).json({ message: "Tâche supprimée avec succès" });
   }),
 );
+/**
+ * @Method  patch
+ * @description update etat de la tache
+ * @route /api/tache/patch
+ * @access private (requiert une authentification)
+ */
+
+router.patch(
+  "/patch",
+  asyncHandler(async (req, res) => {
+   
+  }),
+);
+
 module.exports = router;

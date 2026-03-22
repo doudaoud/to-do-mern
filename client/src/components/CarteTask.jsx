@@ -11,6 +11,16 @@ export default function CarteTask({ taches = [], setCreate, create }) {
       setChecked(initialCheck);
     }
   }, [taches]);
+  useEffect(() => {
+    for (let i of check) {
+      if (i.faite === true) {
+        setChange(true);
+        return;
+      } else {
+        setChange(false);
+      }
+    }
+  }, [check]);
 
   const handleDelete = async (id) => {
     try {
@@ -52,7 +62,8 @@ export default function CarteTask({ taches = [], setCreate, create }) {
                     c.id === task._id ? { ...c, faite: !c.faite } : c,
                   ),
                 );
-                setChange(!change);
+                console.log(typeof check);
+                console.log(check);
               }}
             />
             <div className="task-info">
@@ -101,6 +112,7 @@ export default function CarteTask({ taches = [], setCreate, create }) {
           className="save-button"
           onClick={() => {
             // Ajoutez votre logique de sauvegarde ici
+            // const response  = axios.patch()
             console.log("Sauvegarde des changements:", check);
             setChange(false);
           }}
