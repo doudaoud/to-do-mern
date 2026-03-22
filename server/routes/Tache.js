@@ -2,6 +2,7 @@ const router = require("express").Router();
 const asyncHandler = require("express-async-handler");
 const { tache, validationDataTache } = require("../models/tache");
 const verifyToken = require("../middlewares/auth");
+const mongoose = require('mongoose');
 
 /**
  * @Method  POST
@@ -74,7 +75,13 @@ router.delete(
 router.patch(
   "/patch",
   asyncHandler(async (req, res) => {
-   
+    const array = req.body;
+    const id = array.map((item) => new mongoose.Types.ObjectId(item.id));
+    console.log( typeof id[1]);
+    console.log(id);
+    console.log(id);
+    await tache.updateMany({ _id: { $in: id } }, { $set: { faite: true } });
+    res.status(200).json({ message: "Tâche mise à jour avec succès" });
   }),
 );
 

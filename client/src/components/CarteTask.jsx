@@ -112,9 +112,18 @@ export default function CarteTask({ taches = [], setCreate, create }) {
           className="save-button"
           onClick={() => {
             // Ajoutez votre logique de sauvegarde ici
-            // const response  = axios.patch()
-            console.log("Sauvegarde des changements:", check);
-            setChange(false);
+            try {
+              const response = axios.patch(
+                "http://localhost:3000/api/tache/patch",
+                check,
+              );
+              console.log(response.data);
+              console.log("Sauvegarde des changements:", check);
+              setChange(false);
+
+            } catch (err) {
+              console.log(err);
+            }
           }}
           style={{
             marginTop: "20px",
