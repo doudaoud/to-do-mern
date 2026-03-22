@@ -1,7 +1,7 @@
 import React from "react";
 import Menu from "../components/Menu";
 import "./styles/profile.css";
-import { CheckCircle2, Clock, Trash2, Plus, LogOut } from "lucide-react";
+import { CheckCircle2, Clock, Trash2, Plus, LogOut, Menu as MenuIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { SelectedContext } from "../contexts/SelectedContext";
 import FormTache from "../components/FormTache";
@@ -20,6 +20,7 @@ export default function Profile() {
     priorite: "Toutes",
   });
   const { id } = useParams();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [data, setData] = useState([]);
   const [create, setCreate] = useState(false);
@@ -59,11 +60,43 @@ export default function Profile() {
         </AfficheContext.Provider>
       )}
       <SelectedContext.Provider value={{ selected, setSeleceted }}>
-        <Menu />
+        <Menu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       </SelectedContext.Provider>
+
+      {isMenuOpen && (
+        <div 
+          className="sidebar-overlay" 
+          onClick={() => setIsMenuOpen(false)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0,0,0,0.3)',
+            zIndex: 999
+          }}
+        />
+      )}
       <main className="main-content">
         <header className="content-header">
-          <h1>Mes Tâches</h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+            <button 
+              className="menu-toggle"
+              onClick={() => setIsMenuOpen(true)}
+              style={{
+                display: 'none',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                color: '#1e293b',
+                padding: '5px'
+              }}
+            >
+              <MenuIcon size={24} />
+            </button>
+            <h1>Mes Tâches</h1>
+          </div>
           <div
             style={{
               display: "flex",

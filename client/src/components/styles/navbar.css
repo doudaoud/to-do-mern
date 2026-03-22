@@ -4,6 +4,12 @@
   font-family: sans-serif;
   z-index: 1;
 }
+img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+  }
 .container {
   width: 100%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -21,7 +27,7 @@
 .navbar {
   display: flex;
   width: 70%;
-  flex-flow: row nowrap;
+  flex-flow: row wrap; /* Changed from row nowrap to row wrap */
   justify-content: space-between;
   align-items: center;
   margin: auto;
@@ -39,6 +45,10 @@
 
 @media (max-width: 768px) {
   .navbar {
-    width: 90%;
+    width: 95%; /* Changed from 90% to 95% */
+    padding: 15px 10px; /* Added padding */
+  }
+  .navbar h2 { /* Added new rule for .navbar h2 */
+    font-size: 1.2rem;
   }
 }

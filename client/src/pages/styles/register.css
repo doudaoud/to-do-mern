@@ -172,10 +172,20 @@ h1 {
 
   .form-section {
     flex: 1;
-    padding: 20px;
+    padding: 24px;
   }
   
   .form-box {
     width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 26px;
+  }
+  .form-section {
+    padding: 20px;
   }
 }

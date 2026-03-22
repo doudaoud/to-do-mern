@@ -1,4 +1,3 @@
-import React from "react";
 import {
   ListTodo,
   Flag,
@@ -7,15 +6,21 @@ import {
   FileText,
   User,
   Plus,
+  X,
 } from "lucide-react";
 import "./styles/menu.css";
 import { useContext } from "react";
 import { SelectedContext } from "../contexts/SelectedContext";
-export default function Menu() {
+export default function Menu({ isOpen, onClose }) {
   const { selected, setSeleceted } = useContext(SelectedContext);
   return (
-    <div className="sidebar">
-      <div className="sidebar-logo">TaskFlow</div>
+    <div className={`sidebar ${isOpen ? "open" : ""}`}>
+      <div className="sidebar-header">
+        <div className="sidebar-logo">TaskFlow</div>
+        <button className="sidebar-close" onClick={onClose}>
+          <X size={24} />
+        </button>
+      </div>
 
       <div className="sidebar-section">
         <p className="section-title">CATÉGORIES</p>
