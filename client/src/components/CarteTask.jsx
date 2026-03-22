@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 export default function CarteTask({ taches = [], setCreate, create }) {
   const [check, setChecked] = useState([]);
-
+  const [change, setChange] = useState(false);
   useEffect(() => {
     if (taches) {
       const initialCheck = taches.map((t) => ({ id: t._id, faite: t.faite }));
@@ -42,7 +42,6 @@ export default function CarteTask({ taches = [], setCreate, create }) {
         const isFaite = taskStatus ? taskStatus.faite : task.faite;
         return (
           <div key={task._id} className="task-card">
-            {/* <CheckCircle2  size={24} /> */}
             <input
               type="checkbox"
               className="task-check"
@@ -53,6 +52,7 @@ export default function CarteTask({ taches = [], setCreate, create }) {
                     c.id === task._id ? { ...c, faite: !c.faite } : c,
                   ),
                 );
+                setChange(!change);
               }}
             />
             <div className="task-info">
@@ -96,6 +96,30 @@ export default function CarteTask({ taches = [], setCreate, create }) {
           </div>
         );
       })}
+      {change && (
+        <button
+          className="save-button"
+          onClick={() => {
+            // Ajoutez votre logique de sauvegarde ici
+            console.log("Sauvegarde des changements:", check);
+            setChange(false);
+          }}
+          style={{
+            marginTop: "20px",
+            padding: "10px 20px",
+            backgroundColor: "rgb(0, 102, 255)",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            display: "block",
+            width: "100%",
+            fontWeight: "bold",
+          }}
+        >
+          Enregistrer les modifications
+        </button>
+      )}
     </div>
   );
 }

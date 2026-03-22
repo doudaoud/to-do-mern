@@ -12,62 +12,63 @@ export default function Confirme() {
     message: "",
   });
   const [token, setTokens] = useState();
-  const hendleverify = async () => {
-    // console.log(token);
-    const code_origin = localStorage.getItem("code");
-    const timer = localStorage.getItem("timesend");
-    let time = new Date();
-    const time_houre = time.getHours();
-    let time_minuts = time.getMinutes();
-    if (time_minuts < 10) time_minuts = `0${time_minuts}`;
-    time = `${time_houre}:${time_minuts}`;
-    const timer_houre = timer.slice(0, 2);
-    const timer_minuts = timer.slice(3, 5);
+  const [loading, setLoading] = useState(false);
 
-    if (Number(timer_houre) < time_houre) {
-      setState({
-        valide: false,
-        message: "le code est invalide fait un autre ptobleme heure ",
+  // Fonction pour vérifier le code (Appel au Backend)
+  const hendleverify = async () => {
+    const email = localStorage.getItem("email");
+
+    try {
+      setLoading(true);
+      // Le backend attend { email, code } sur la route /api/verify
+      const response = await axios.post("http://localhost:3000/api/verify", {
+        email: email,
+        code: token,
       });
-      console.log(state);
-    } else if (time_minuts - Number(timer_minuts) > 15) {
-      setState({
-        valide: false,
-        message: "le code est invalide fait un autre probleme minuts ",
-      });
-      console.log(state);
-    } else if (code_origin != token) {
-      setState({
-        valide: false,
-        message: "le code est inncorct verify le code dans votre mail ",
-      });
-      console.log(state);
-    } else {
-      setState({
-        valide: true,
-        message: "le code est correct",
-      });
-      const user = {
-        email: localStorage.getItem("email"),
-        name: localStorage.getItem("name"),
-        mdps: localStorage.getItem("mdps"),
-      };
-      try {
-        const response = await axios.post(
-          "http://localhost:3000/api/createuser/",
-          user,
-        );
-        console.log(response);
-        if (response.status === 200) {
-          localStorage.clear()
-          setTimeout(() => {
-          navigate("/login");   
-          }, 1000);
-         
-        }
-      } catch (error) {
-        console.log(error);
+
+      if (response.status === 201 || response.status === 200) {
+        setState({ valide: true, message: "Compte vérifié avec succès !" });
+        localStorage.clear(); // Nettoyer les données temporaires
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
       }
+    } catch (error) {
+      console.log(error);
+      setState({
+        valide: false,
+        message: error.response?.data?.message || "Code incorrect ou expiré.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fonction pour renvoyer le code
+  const handleResend = async () => {
+    const email = localStorage.getItem("email");
+    const nomComplet = localStorage.getItem("name");
+    const password = localStorage.getItem("mdps");
+
+    try {
+      setLoading(true);
+      // On rappelle /api/register pour générer un nouveau code
+      await axios.post("http://localhost:3000/api/register", {
+        nomComplet,
+        Email: email,
+        password,
+      });
+      setState({
+        valide: true, // true ici juste pour la couleur verte du message
+        message: "Un nouveau code a été envoyé par email.",
+      });
+    } catch (error) {
+      setState({
+        valide: false,
+        message: "Erreur lors du renvoi du code.",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,8 +93,12 @@ export default function Confirme() {
             />
           </div>
 
-          <button className="verify-btn" disabled={state.valide} onClick={hendleverify}>
-            Vérifier le code
+          <button
+            className="verify-btn"
+            disabled={loading}
+            onClick={hendleverify}
+          >
+            {loading ? "Chargement..." : "Vérifier le code"}
           </button>
           {state.message && (
             <p
@@ -111,7 +116,13 @@ export default function Confirme() {
 
           <p className="resend-text">Vous n'avez pas reçu le code ?</p>
 
-          <button className="resend-btn">⟳ Renvoyer le code</button>
+          <button
+            className="resend-btn"
+            onClick={handleResend}
+            disabled={loading}
+          >
+            ⟳ Renvoyer le code
+          </button>
 
           <p className="footer">Le code expire dans 15 minutes</p>
         </div>

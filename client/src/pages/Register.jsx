@@ -32,18 +32,22 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    if (form.mdps !== form.cmdps) {
+      setLoading(false);
+      setErrorMsg("Les mots de passe ne correspondent pas");
+      return;
+    }
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/register",
-        form,
-      );
+      const response = await axios.post("http://localhost:3000/api/register", {
+        nomComplet: form.userName,
+        Email: form.email,
+        password: form.mdps,
+      });
 
       console.log(response);
-      localStorage.setItem("timesend", response.data.temps);
-      localStorage.setItem("code", response.data.passwordverif);
       localStorage.setItem("email", form.email);
       localStorage.setItem("name", form.userName);
-      localStorage.setItem("mdps", response.data.password);
+      localStorage.setItem("mdps", form.mdps); // On stocke le mot de passe du formulaire pour le renvoi
       localStorage.setItem("verify", true);
       setLoading(false);
       setCreate(!create);
