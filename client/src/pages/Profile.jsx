@@ -40,12 +40,12 @@ export default function Profile() {
   useEffect(() => {
     const handlecharge = async () => {
       try {
+        const token = localStorage.getItem("TokenJwt");
         const response = await axios.get(
           `http://localhost:3000/api/tache/get/${id}`,
+          { headers: { Authorization: `Bearer ${token}` } },
         );
         setData(response.data.taches);
-        console.log(typeof response.data.taches);
-        console.log(response.data.taches);
       } catch (err) {
         console.log(err);
       }
