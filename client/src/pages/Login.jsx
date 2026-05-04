@@ -80,13 +80,13 @@ export default function Login() {
                   if (response.status === 200) {
                     setMessage(response.data.message);
                     localStorage.setItem("TokenJwt", response.data.token);
-                    console.log(response.data.dataUser);
-                    // localStorage.setItem("id", response.data.dataUser._id);
+                    localStorage.setItem("userId", response.data.dataUser._id);
+                    localStorage.setItem("nomComplet", response.data.dataUser.nomComplet);
                     let id = response.data.dataUser._id;
                     setTimeout(() => {
                       setMessage("");
-                      navigate(`/profile/${id}`);
-                    }, 3000);
+                      navigate(`/dashboard`);
+                    }, 1500);
                   }
                 } catch (error) {
                   console.log(error);

@@ -44,11 +44,11 @@ router.post(
  */
 router.get(
   "/get/:id",
+  verifyToken,
   asyncHandler(async (req, res) => {
     const id = req.params.id;
-
     const taches = await tache.find({ user: id });
-    res.status(200).json({ taches, message: "taches recupirer avec succes" });
+    res.status(200).json({ taches, message: "Tâches récupérées avec succès" });
   }),
 );
 /**
@@ -86,9 +86,47 @@ router.patch(
       return await tache.findByIdAndUpdate(item.id, { $set: { faite: item.faite } });
     });
 
-    // await Promise.all(updatePromises);
-    
+    await Promise.all(updatePromises);
     res.status(200).json({ message: "Tâches mises à jour avec succès" });
+  }),
+);
+
+/**
+ * @Method  GET
+ * @description statistiques des taches pour le dashboard
+ * @route /api/tache/stats/:id
+ * @access private
+ */
+router.get(
+  "/stats/:id",
+  verifyToken,
+  asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const taches = await tache.find({ user: id });
+    const now = new Date();
+
+    const total = taches.length;
+    const completed = taches.filter((t) => t.faite).length;
+    const pending = taches.filter((t) => !t.faite).length;
+    const overdue = taches.filter(
+      (t) => !t.faite && new Date(t.deadline) < now,
+    ).length;
+
+    const categories = {};
+    taches.forEach((t) => {
+      categories[t.categorie] = (categories[t.categorie] || 0) + 1;
+    });
+
+    const priorities = { High: 0, Medium: 0, Low: 0 };
+    taches.forEach((t) => {
+      if (priorities[t.priorite] !== undefined) priorities[t.priorite]++;
+    });
+
+    const recent = [...taches]
+      .sort((a, b) => new Date(b.deadline) - new Date(a.deadline))
+      .slice(0, 5);
+
+    res.status(200).json({ total, completed, pending, overdue, categories, priorities, recent });
   }),
 );
 

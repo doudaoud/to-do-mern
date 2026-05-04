@@ -6,6 +6,7 @@ import Confirme from "./pages/Confirme";
 import { useEffect } from "react";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Profile from "./pages/Profile";
+import Dashboard from "./pages/Dashboard";
 import BlockedRoute from "./utils/BlockedRoute";
 function App() {
    useEffect(() => {
@@ -40,7 +41,7 @@ function App() {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <h1>Dashboard page</h1>
+              <Dashboard />
             </ProtectedRoute>
           }
         />

@@ -1,18 +1,22 @@
 import {
   ListTodo,
-  Flag,
-  Layout,
-  Users,
-  FileText,
-  User,
-  Plus,
+  LayoutDashboard,
   X,
 } from "lucide-react";
 import "./styles/menu.css";
 import { useContext } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { SelectedContext } from "../contexts/SelectedContext";
 export default function Menu({ isOpen, onClose }) {
   const { selected, setSeleceted } = useContext(SelectedContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const userId = localStorage.getItem("userId");
+
+  const goTo = (path) => {
+    navigate(path);
+    onClose();
+  };
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       <div className="sidebar-header">
@@ -20,6 +24,26 @@ export default function Menu({ isOpen, onClose }) {
         <button className="sidebar-close" onClick={onClose}>
           <X size={24} />
         </button>
+      </div>
+
+      <div className="sidebar-section">
+        <p className="section-title">NAVIGATION</p>
+        <ul className="sidebar-menu">
+          <li
+            onClick={() => goTo("/dashboard")}
+            className={location.pathname === "/dashboard" ? "menu-item active" : "menu-item"}
+          >
+            <LayoutDashboard size={16} style={{ marginRight: 8 }} />
+            Tableau de bord
+          </li>
+          <li
+            onClick={() => userId && goTo(`/profile/${userId}`)}
+            className={location.pathname.startsWith("/profile") ? "menu-item active" : "menu-item"}
+          >
+            <ListTodo size={16} style={{ marginRight: 8 }} />
+            Mes tâches
+          </li>
+        </ul>
       </div>
 
       <div className="sidebar-section">
