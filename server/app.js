@@ -13,6 +13,12 @@ app.use(express.json());
 app.use("/api", require("./routes/Auth"));
 app.use("/api/tache", require("./routes/Tache"));
 
+// gestionnaire d'erreurs global — retourne toujours du JSON
+app.use((err, req, res, next) => {
+  console.error("Erreur serveur :", err.message);
+  res.status(err.status || 500).json({ message: err.message || "Erreur interne du serveur." });
+});
+
 // create the server
 async function start_server() {
   try {

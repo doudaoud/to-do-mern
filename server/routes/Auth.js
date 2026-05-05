@@ -47,7 +47,7 @@ router.post(
 
       return res.status(200).json({ message: "Code de vérification envoyé." });
     } else {
-      return res.status(500).json({ message: "Erreur lors de l'envoi de l'email." });
+      return res.status(500).json({ message: `Erreur envoi email : ${response.message}` });
     }
   }),
 );
